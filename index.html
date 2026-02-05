@@ -4,169 +4,191 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>生日快乐</title>
+
 <style>
-body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-                 "Microsoft JhengHei", Arial, sans-serif;
-    background: radial-gradient(circle at top left, #1e3c72, #2a5298);
-    height: 100vh;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
+body{
+    margin:0;
+    font-family:system-ui;
+    background: radial-gradient(circle at top left,#1e3c72,#2a5298);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
 }
 
-body::after {
-    content: "";
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    background: transparent;
-    box-shadow: 
-        50px 50px 2px #fff,
-        150px 100px 2px #fff,
-        250px 200px 2px #fff,
-        400px 300px 2px #fff,
-        600px 50px 2px #fff,
-        700px 400px 2px #fff,
-        900px 150px 2px #fff,
-        1200px 350px 2px #fff;
-    animation: twinkle 3s infinite alternate;
-    z-index: 0;
+.card-container{
+    width:100%;
+    max-width:420px;
+    padding:14px;
+    perspective:1200px;
 }
 
-@keyframes twinkle { 0%{opacity:0.2;}50%{opacity:0.8;}100%{opacity:0.2;} }
-
-.card-container { perspective: 1500px; position: relative; z-index: 2; }
-.card { 
-    width: 95%; 
-    max-width: 440px; 
-    height: auto; 
-    position: relative; 
-    transform-style: preserve-3d; 
-    transition: transform 1.2s cubic-bezier(.4,.2,.2,1); 
+.card{
+    width:100%;
+    position:relative;
+    transform-style:preserve-3d;
+    transition:transform 1.2s cubic-bezier(.4,.2,.2,1);
 }
-.card.open { transform: rotateY(180deg); }
 
-.page { 
-    position: absolute; 
-    width: 100%; 
-    min-height: 500px;
-    background: #ffffff; 
-    border-radius: 18px; 
-    box-shadow: 0 25px 45px rgba(0,0,0,0.15); 
-    backface-visibility: hidden; 
-    padding: 36px; 
-    box-sizing: border-box; 
-    text-align: center; 
-    overflow: hidden; 
-    color: #2b2b2b; 
+.card.open{transform:rotateY(180deg)}
+
+.page{
+    width:100%;
+    background:#fff;
+    border-radius:18px;
+    box-shadow:0 25px 45px rgba(0,0,0,.2);
+    padding:28px;
+    text-align:center;
+    backface-visibility:hidden;
+    box-sizing:border-box;
 }
-.front { display: flex; flex-direction: column; justify-content: center; }
-.back { transform: rotateY(180deg); }
 
-h1 { font-weight: 700; letter-spacing: 1px; margin: 10px 0; font-size: 32px; }
-.hero-line { font-size: 14px; letter-spacing: 2px; color: #1f4fd8; margin-bottom: 8px; font-weight: 600; }
-p { font-size: 16px; line-height: 1.8; color: #555; margin-top: 10px; }
-button { margin-top: 28px; padding: 14px 36px; font-size: 16px; border: none; border-radius: 30px; background: linear-gradient(135deg, #1f4fd8, #e63946); color: white; cursor: pointer; box-shadow: 0 8px 20px rgba(31,79,216,0.3); }
-button:hover { transform: translateY(-2px); }
+.front{
+    position:relative;
+}
 
-.photo-row { display: flex; gap: 14px; margin-bottom: 16px; flex-wrap: wrap; justify-content: center; }
-.photo-box { width: 48%; text-align: center; margin-bottom: 12px; }
-.photo-box img { width: 100%; height: auto; object-fit: cover; border-radius: 12px; display: block; }
-.photo-box span { display: block; margin-top: 6px; font-size: 13px; color: #777; }
+.back{
+    position:absolute;
+    top:0;
+    left:0;
+    transform:rotateY(180deg);
+}
 
-.firework { position: absolute; width: 4px; height: 4px; border-radius: 50%; pointer-events: none; }
+.hero-line{
+    font-size:12px;
+    letter-spacing:2px;
+    color:#1f4fd8;
+    font-weight:600;
+}
 
-/* 手机适配 */
-@media (max-width: 480px) {
-    h1 { font-size: 28px; }
-    .hero-line { font-size: 13px; }
-    p { font-size: 14px; }
-    button { padding: 12px 30px; font-size: 15px; }
-    .photo-box { width: 100%; }
-    .page { padding: 24px; }
+h1{
+    font-size:26px;
+    margin:12px 0;
+}
+
+p{
+    font-size:14px;
+    line-height:1.7;
+    color:#555;
+}
+
+button{
+    margin-top:22px;
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(135deg,#1f4fd8,#e63946);
+    color:#fff;
+    font-size:14px;
+}
+
+.photo-row{
+    display:flex;
+    gap:12px;
+    margin-bottom:14px;
+}
+
+.photo-box{
+    flex:1;
+}
+
+.photo-box img{
+    width:100%;
+    border-radius:12px;
+}
+
+.photo-box span{
+    font-size:12px;
+    color:#777;
+}
+
+.firework{
+    position:absolute;
+    width:4px;
+    height:4px;
+    border-radius:50%;
+    pointer-events:none;
 }
 </style>
 </head>
+
 <body>
 
 <div class="card-container">
-    <div class="card" id="card">
-        <div class="page front">
-            <div class="hero-line">A NEW CHAPTER</div>
-            <h1>生日快乐</h1>
-            <p>点一下，看看一路走来的你</p>
-            <button onclick="openCard()">OPEN</button>
+<div class="card" id="card">
+
+<div class="page front">
+    <div class="hero-line">A NEW CHAPTER</div>
+    <h1>生日快乐</h1>
+    <p>点一下，看看一路走来的你</p>
+    <button onclick="openCard()">OPEN</button>
+</div>
+
+<div class="page back">
+    <div class="photo-row">
+        <div class="photo-box">
+            <img src="child.jpg">
+            <span>小时候</span>
         </div>
-        <div class="page back">
-            <div class="photo-row">
-                <div class="photo-box">
-                    <img src="child.jpg" alt="childhood">
-                    <span>小时候</span>
-                </div>
-                <div class="photo-box">
-                    <img src="now.jpg" alt="now">
-                    <span>现在</span>
-                </div>
-            </div>
-            <div class="hero-line">HAPPY BIRTHDAY</div>
-            <h1>林颂喆</h1>
-            <p>希望你在新的一岁里，每一天都能开心<br>平安，生活像阳光一样温暖<br><br>梦想都能慢慢实现<br>生日快乐，我的表弟！</p>
+        <div class="photo-box">
+            <img src="now.jpg">
+            <span>现在</span>
         </div>
     </div>
+
+    <div class="hero-line">HAPPY BIRTHDAY</div>
+    <h1>林颂喆</h1>
+    <p>
+    希望你在新的一岁里每天开心<br>
+    平安顺利，生活像阳光一样温暖<br><br>
+    梦想慢慢实现<br>
+    生日快乐！
+    </p>
+</div>
+
+</div>
 </div>
 
 <audio id="bgm" loop>
-    <source src="music.mp3" type="audio/mpeg">
+<source src="music.mp3" type="audio/mpeg">
 </audio>
 
 <script>
-function openCard() {
-    document.getElementById("card").classList.add("open");
-    const music = document.getElementById("bgm");
-    music.volume = 0.45;
-    music.play();
-    startFireworksLoop();
+function openCard(){
+    document.getElementById("card").classList.add("open")
+    const music=document.getElementById("bgm")
+    music.volume=0.45
+    music.play()
+    startFireworks()
 }
 
-function startFireworksLoop() {
-    const colors = ["#ff3f3f","#ff9f1c","#fff600","#2eff8d","#3f7fff","#c93fff"];
+function startFireworks(){
+    const colors=["#ff3f3f","#ff9f1c","#fff600","#2eff8d","#3f7fff","#c93fff"]
 
-    function launchFirework() {
-        const centerX = Math.random() < 0.5 ? Math.random() * 300 : window.innerWidth - Math.random()*300;
-        const particleCount = 50 + Math.floor(Math.random()*30);
-        const peak = 200 + Math.random()*250;
+    setInterval(()=>{
+        for(let i=0;i<40;i++){
+            const p=document.createElement("div")
+            p.className="firework"
+            p.style.background=colors[Math.random()*colors.length|0]
+            document.body.appendChild(p)
 
-        for(let i=0;i<particleCount;i++){
-            const p = document.createElement("div");
-            p.className="firework";
-            p.style.background = colors[Math.floor(Math.random()*colors.length)];
-            p.style.width = p.style.height = (2+Math.random()*3)+"px";
-            document.body.appendChild(p);
+            const x=innerWidth/2
+            const y=innerHeight
+            const dx=(Math.random()-0.5)*200
+            const dy=Math.random()*-300
 
-            const angle = Math.random()*2*Math.PI;
-            const distance = 50+Math.random()*80;
-            const dx = Math.cos(angle)*distance;
-            const dy = Math.sin(angle)*distance;
-
-            p.style.left = centerX+"px";
-            p.style.top = window.innerHeight+"px";
+            p.style.left=x+"px"
+            p.style.top=y+"px"
 
             p.animate([
-                { transform: `translate(0px,0px) scale(1)`, opacity:1 },
-                { transform: `translate(0px,-${peak}px) scale(1.2)`, opacity:1 },
-                { transform: `translate(${dx}px,-${peak+dy}px) scale(1)`, opacity:0 }
-            ], { duration: 1800+Math.random()*600, easing:"ease-out" });
+              {transform:"translate(0,0)",opacity:1},
+              {transform:`translate(${dx}px,${dy}px)`,opacity:0}
+            ],{duration:1600})
 
-            setTimeout(()=>p.remove(), 2200);
+            setTimeout(()=>p.remove(),1600)
         }
-    }
-
-    setInterval(launchFirework, 500);
+    },600)
 }
 </script>
 
